@@ -1,0 +1,16 @@
+Date,Description,Amount,Category
+2026-01-01,Salary,30000,Income
+2026-01-02,Groceries,-1500,Food
+2026-01-03,Bus Ticket,-100,Transport
+2026-01-05,Restaurant,-750,Food
+2026-01-08,Electricity Bill,-1200,Utilities
+2026-01-10,Freelance Work,5000,Income
+2026-01-12,Shopping,-2000,Shopping
+2026-01-15,Internet Bill,-800,Utilities
+2026-01-20,Movie,-500,Entertainment
+2026-02-01,Salary,30000,Income
+2026-02-02,Groceries,-2000,Food
+2026-02-05,Restaurant,-1000,Food
+2026-02-08,Bus Ticket,-150,Transport
+2026-02-10,Shopping,-3500,Shopping
+2026-02-15,Electricity Bill,-1300,Utilities
