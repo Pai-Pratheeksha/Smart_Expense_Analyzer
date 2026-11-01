@@ -3,6 +3,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import io
+import uuid
+
+from utils.supabase_client import supabase
 
 from utils.data_processor import load_transactions
 
@@ -23,6 +26,19 @@ st.set_page_config(
     page_icon="💰",
     layout="wide"
 )
+
+# -------------------------------
+# App Password Protection
+# -------------------------------
+
+password = st.text_input(
+    "Enter password to access Smart Expense Analyzer",
+    type="password"
+)
+
+if password != st.secrets["APP_PASSWORD"]:
+    st.warning("Please enter the correct password.")
+    st.stop()
 
 st.title("💰 Smart Expense Analyzer")
 
@@ -45,7 +61,30 @@ if uploaded_file is not None:
 
     try:
 
+        # -------------------------------
+        # Upload CSV to Supabase Storage
+        # -------------------------------
+
+        file_data = uploaded_file.getvalue()
+
+        # Generate a unique file name
+        file_name = f"uploads/{uuid.uuid4()}_{uploaded_file.name}"
+
+        # Upload the original CSV
+        supabase.storage.from_("expense-files").upload(
+            path=file_name,
+            file=file_data,
+            file_options={
+                "content-type": "text/csv"
+            }
+        )
+
+        st.success("CSV uploaded to cloud storage successfully!")
+
+        # -------------------------------
         # Load and clean transactions
+        # -------------------------------
+
         df = load_transactions(uploaded_file)
 
         # -------------------------------
